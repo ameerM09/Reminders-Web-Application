@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content="IE=edge">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+      rel = "stylesheet"
+      href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity = "sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin = "anonymous"
+    />
+    <link
+      rel = "stylesheet"
+      href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin = "anonymous"
+    />
+
+    <title>
+        {% block title %}Home{% endblock %}
+    </title>
+
+</head>
+<body>
+
+    <nav class = "navbar navbar-expand-lg" style = "background-color: #643ce8;">
+
+        <button 
+        class = "navbar-toggler" 
+        type = "button"
+        data-toggle = "collapse" 
+        data-target = "#navbar">
+            <span class = "navbar-toggler-icon text-light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+            </span>
+        </button>
+
+        <div class = "collapse navbar-collapse" id = "navbar">
+            <div class = "navbar-nav">
+
+                <span class = "navbar-brand text-light">
+                    <strong>
+                        SimplyTasks
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2894fa" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                          </svg>
+                    </strong>
+
+                </span>
+
+                {% if account.is_authenticated %}
+                    <a class = "nav-link text-light" id = "home" href = "/">Home</a>
+                    <a class = "nav-link text-light" id = "about" href = "/about">About</a>
+                    <a class = "nav-link text-light" id = "logout" href = "/logout">Logout</a>
+                
+                {% else %}
+                    <a class = "nav-link text-light" id = "about" href = "/about">About</a>
+                    <a class = "nav-link text-light" id = "signup" href = "/signup">Sign Up</a>
+                    <a class = "nav-link text-light" id = "signin" href = "/signin">Sign In</a>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </nav>
+    
+    {% with messages = get_flashed_messages(with_categories = true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+            <div class = "alert alert-warning alert-dismissable fade show" role = "alert">
+                    {{ message }}
+                <buton type = "button" class = "close" data-dismiss = "alert">
+                    <span aria-hidden = true>&times;</span>
+                </buton>
+            </div>
+
+        {% else %}
+        <div class = "alert alert-success alert-dismissable fade show" role = "alert">
+                {{ message }}
+            <buton type = "button" class = "close" data-dismiss = "alert">
+                <span aria-hidden = true>&times;</span>
+            </buton>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class = "container">
+        {% block page_content%}{% endblock %}
+    </div>
+
+    <script
+    src = "https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity = "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin = "anonymous"
+  ></script>
+
+  <script
+    src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity = "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin = "anonymous"
+  ></script>
+
+  <script
+    src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity = "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin = "anonymous"
+  ></script>
+
+  <script
+  type="text/javascript"
+  src="{{ url_for('static', filename='index.js') }}"
+></script>
+    
+</body>
+</html>

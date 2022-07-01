@@ -1,0 +1,43 @@
+{% extends "base.html" %}{% block title %}Home{% endblock %}
+
+{% block page_content %}
+    <h2>
+        <center>
+            <strong>
+                My Tasks
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#2894fa" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                  </svg>
+            </strong>
+        </center>
+    </h2>
+
+<br>
+
+<ul class = 'list-group list-group-flush' id = 'notes'>
+    {% for note in account.notes %}
+    
+        <li class = 'list-group-item'>
+            {{ note.content }}
+
+            <button type = 'button' class = 'close' onClick = 'delAccountNote({{ note.id }})'>
+                <span aria-hidden = true>&times;</span>
+            </button>
+        </li>
+
+    {% endfor %}
+</ul>
+
+<form method = 'POST'>
+    <textarea name = 'note' id = 'note' class = 'form-control'></textarea>
+
+    <br>
+
+    <div>
+        <center>
+            <button type = 'enter' class = 'btn text-white' style = 'background-color: #2d9ffc;'>Add Reminder</button>
+        </center>
+    </div>
+
+</form>
+{% endblock %}
