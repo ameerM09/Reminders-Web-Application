@@ -16,7 +16,6 @@ class Account(db.Model, UserMixin):
 
 # Enforces that no two accounts can hold the same associated emai
     email = db.Column(db.String(150), unique = True)
-    username = db.Column(db.String(150))
     password = db.Column(db.String(150))
 
 # Stores notes onto account through foreign keys
