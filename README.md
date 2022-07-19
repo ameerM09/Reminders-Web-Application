@@ -1,2 +1,3 @@
 # SimplyTasks-Flask-Web-App
-Flask packages used to create web application where user can create reminders or notes for themselves 
+
+Python Flask library used to create a simple web application where users can create reminders for themselves. Project involvs user authentication as well as an SQLAlchemy database. 
